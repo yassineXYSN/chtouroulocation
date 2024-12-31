@@ -8,7 +8,7 @@ Create the Database and Tables
 Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and execute the following SQL commands:
 
 sql
-CREATE DATABASE chtouroulocation /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;  
+CREATE DATABASE chtouroulocation ;  
 
 CREATE TABLE makes (  
     idmake INT NOT NULL AUTO_INCREMENT,  
