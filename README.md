@@ -61,6 +61,20 @@ CREATE TABLE clients (
     nbrents INT(10) UNSIGNED ZEROFILL DEFAULT '0000000000',  
     PRIMARY KEY (idusers)  
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+
+CREATE TABLE `rents` (
+  `idrent` int NOT NULL AUTO_INCREMENT,
+  `iduser` int DEFAULT NULL,
+  `idcar` int DEFAULT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  PRIMARY KEY (`idrent`),
+  KEY `fk_rent_user_idx` (`idcar`),
+  KEY `fk_rent_client` (`iduser`),
+  CONSTRAINT `fk_rent_car` FOREIGN KEY (`idcar`) REFERENCES `cars` (`idcars`),
+  CONSTRAINT `fk_rent_client` FOREIGN KEY (`iduser`) REFERENCES `clients` (`idusers`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 Verify the Database
 Confirm that the database chtouroulocation and its tables (makes, models, cars, admins, clients) were created successfully.
 
