@@ -14,7 +14,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
         makename VARCHAR(45) DEFAULT NULL,  
         PRIMARY KEY (idmake),  
         UNIQUE KEY makename_UNIQUE (makename)  
-    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+    );  
     
     CREATE TABLE models (  
         idmodel INT NOT NULL,  
@@ -23,7 +23,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
         PRIMARY KEY (idmodel),  
         KEY fkmodelmake (idmake),  
         CONSTRAINT fkmodelmake FOREIGN KEY (idmake) REFERENCES makes (idmake)  
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+    ) ;  
     
     CREATE TABLE cars (  
         idcars INT NOT NULL AUTO_INCREMENT,  
@@ -38,7 +38,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
         KEY fkcarmodel (idmodel),  
         CONSTRAINT fkcarmake FOREIGN KEY (idmake) REFERENCES makes (idmake),  
         CONSTRAINT fkcarmodel FOREIGN KEY (idmodel) REFERENCES models (idmodel)  
-    ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+    ) ;  
     
     CREATE TABLE admins (  
         idusers INT NOT NULL AUTO_INCREMENT,  
@@ -48,7 +48,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
         AddressPostal VARCHAR(45) NOT NULL,  
         mdp VARCHAR(45) NOT NULL,  
         PRIMARY KEY (idusers)  
-    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+    ) ;  
     
     CREATE TABLE clients (  
         idusers INT NOT NULL AUTO_INCREMENT,  
@@ -59,7 +59,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
         mdp VARCHAR(45) NOT NULL,  
         nbrents INT(10) UNSIGNED ZEROFILL DEFAULT '0000000000',  
         PRIMARY KEY (idusers)  
-    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+    ) ;  
     
     CREATE TABLE `rents` (
       `idrent` int NOT NULL AUTO_INCREMENT,
@@ -72,12 +72,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
       KEY `fk_rent_client` (`iduser`),
       CONSTRAINT `fk_rent_car` FOREIGN KEY (`idcar`) REFERENCES `cars` (`idcars`),
       CONSTRAINT `fk_rent_client` FOREIGN KEY (`iduser`) REFERENCES `clients` (`idusers`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-    
-    Verify the Database
-    Confirm that the database chtouroulocation and its tables (makes, models, cars, admins, clients) were created successfully.
-    
-    insert statements
+    ) ;
     
     -- Insert makes
     INSERT INTO makes (idmake, makename) VALUES
@@ -205,6 +200,20 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
     (48, 'Brown', '2022', 46000.0, 1, 6, 24), -- Audi Q7
     (49, 'Pink', '2021', 28000.0, 1, 9, 35), -- Nissan Rogue
     (50, 'White', '2020', 31000.0, 1, 10, 38); -- Hyundai Sonata
+
+    CREATE TABLE `rents` (
+  `idrent` int NOT NULL AUTO_INCREMENT,
+  `iduser` int DEFAULT NULL,
+  `idcar` int DEFAULT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  PRIMARY KEY (`idrent`),
+  KEY `fk_rent_user_idx` (`idcar`),
+  KEY `fk_rent_client` (`iduser`),
+  CONSTRAINT `fk_rent_car` FOREIGN KEY (`idcar`) REFERENCES `cars` (`idcars`),
+  CONSTRAINT `fk_rent_client` FOREIGN KEY (`iduser`) REFERENCES `clients` (`idusers`)
+);
+
 
 Java Configuration
 Set Up JDBC Connection
