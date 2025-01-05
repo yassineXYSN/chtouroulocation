@@ -6,7 +6,7 @@ Database Setup
 Create the Database and Tables
 Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and import Dump20250103.sql file or execute the following SQL commands:
 
-    sql
+sql
     CREATE DATABASE chtouroulocation ;  
     
     CREATE TABLE makes (  
@@ -72,7 +72,7 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
       KEY `fk_rent_client` (`iduser`),
       CONSTRAINT `fk_rent_car` FOREIGN KEY (`idcar`) REFERENCES `cars` (`idcars`),
       CONSTRAINT `fk_rent_client` FOREIGN KEY (`iduser`) REFERENCES `clients` (`idusers`)
-    ) ;
+    );
     
     -- Insert makes
     INSERT INTO makes (idmake, makename) VALUES
@@ -200,19 +200,6 @@ Open your MySQL client (e.g., MySQL Workbench or the command-line interface) and
     (48, 'Brown', '2022', 46000.0, 1, 6, 24), -- Audi Q7
     (49, 'Pink', '2021', 28000.0, 1, 9, 35), -- Nissan Rogue
     (50, 'White', '2020', 31000.0, 1, 10, 38); -- Hyundai Sonata
-
-    CREATE TABLE `rents` (
-  `idrent` int NOT NULL AUTO_INCREMENT,
-  `iduser` int DEFAULT NULL,
-  `idcar` int DEFAULT NULL,
-  `startdate` date DEFAULT NULL,
-  `enddate` date DEFAULT NULL,
-  PRIMARY KEY (`idrent`),
-  KEY `fk_rent_user_idx` (`idcar`),
-  KEY `fk_rent_client` (`iduser`),
-  CONSTRAINT `fk_rent_car` FOREIGN KEY (`idcar`) REFERENCES `cars` (`idcars`),
-  CONSTRAINT `fk_rent_client` FOREIGN KEY (`iduser`) REFERENCES `clients` (`idusers`)
-);
 
 
 Java Configuration
